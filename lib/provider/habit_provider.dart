@@ -9,7 +9,7 @@ class HabitProvider with ChangeNotifier {
   int get habitCompleted => _habit.where((habit) => habit.isCompleted).length;
   double get habitPerPercentage {
     if (totalHabit == 0) return 0;
-    return (totalHabit / habitCompleted) * 100;
+    return (habitCompleted / totalHabit) * 100;
   }
 
   void addHabit(String title) {
@@ -20,7 +20,7 @@ class HabitProvider with ChangeNotifier {
 
   void toggleHabbit(String id) {
     final index = _habit.indexWhere((habit) => habit.id == id);
-    if (index != 1) {
+    if (index != -1) {
       _habit[index].isCompleted = !habit[index].isCompleted;
       notifyListeners();
     }
